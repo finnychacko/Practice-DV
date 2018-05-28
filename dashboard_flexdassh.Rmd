@@ -1,0 +1,72 @@
+---
+title: "Flexdashboard 1"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(DT)
+library(dplyr)
+library(ggplot2)
+```
+
+Sales {data-orientation=rows data-navmenu="Annual Report"}
+===================================================================
+
+Row 
+-----------------------------------------------------------------------
+### ValueBox1 - Average City Milage
+
+```{r}
+value <- round(mean(mpg$cty),2)
+valueBox(value,icon = "fa-car",color = ifelse(value<30,"red","Green"))
+```
+
+### ValueBox 2 - Average Highway Milage
+```{r}
+value <- round(mean(mpg$hwy),2)
+valueBox(value,icon = "fa-car",color = ifelse(value<30,"red","Green"))
+```
+
+
+Row
+-----------------------------------------------------------------------
+### Guage value box
+
+```{r}
+avg_mil <- round(mean(mpg$cty+mpg$hwy),2) 
+gauge(avg_mil,min = 0,max = 70, gaugeSectors(success = c(15,25),warning = c(12,16),danger = c(26,30),colors = c("Green","Blue","Red")))
+```
+
+### Chart C
+
+```{r}
+
+```
+
+
+Revenue {data-orientation=rows data-navmenu="Annual Report"}
+============================================
+Column
+----------------------------------------
+### Chart D
+
+```{r}
+
+```
+Column
+----------------------------------------
+### Chart E
+
+```{r}
+
+```
+
+### Chart F
+
+```{r}
+
+```

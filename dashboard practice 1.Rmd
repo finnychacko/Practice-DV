@@ -1,0 +1,95 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(DT)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+```
+
+Overview
+=======================================================================
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+datatable(mpg, options = list(lengthMenu = c(5,10,15,20,25,30,35)))
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+###Avg mileage of Compact
+
+```{r}
+value <- mpg %>% select(class,cty,hwy) %>%filter(class=="compact") %>%  summarise(round(mean(cty+hwy)))
+valueBox(value,icon = "fa-car",color = "red")
+```
+
+###Avg mileage of subcompact
+
+```{r}
+value <- mpg %>% select(class,cty,hwy) %>%filter(class=="subcompact") %>%  summarise(round(mean(cty+hwy)))
+valueBox(value,icon = "fa-car",color = "black")
+```
+
+###Avg mileage of midsize
+
+```{r}
+value <- mpg %>% select(class,cty,hwy) %>%filter(class=="midsize") %>%  summarise(round(mean(cty+hwy)))
+valueBox(value,icon = "fa-car",color = "green")
+```
+
+
+### Avg mileage of suv
+```{r}
+value <- mpg %>% select(class,cty,hwy) %>%filter(class=="suv") %>%  summarise(round(mean(cty+hwy)))
+valueBox(value,icon = "fa-car",color = "blue")
+```
+
+Column {data-width=325}
+------------------------------------------------------------------------------------------------------
+###Avg mileage of 2seater 
+
+```{r}
+value <- mpg %>% select(class,cty,hwy) %>%filter(class=="2seater") %>%  summarise(round(mean(cty+hwy)))
+valueBox(value,icon = "fa-car",color = "purple")
+```
+
+###Avg mileage of minivan
+
+```{r}
+value <- mpg %>% select(class,cty,hwy) %>%filter(class=="minivan") %>%  summarise(round(mean(cty+hwy)))
+valueBox(value,icon = "fa-car",color = "orange")
+```
+
+
+###Avg mileage of pickup
+
+```{r}
+value <- mpg %>% select(class,cty,hwy) %>%filter(class=="pickup") %>%  summarise(round(mean(cty+hwy)))
+valueBox(value,icon = "fa-car",color = "brown")
+```
+
+Class wise
+====================================================================================================
+
+Column
+----------------------------------------------------------------------------------------------------
+
+### Manufacturer wise mileage
+
+```{r}
+ggplot(mpg,aes(x=cty,y=hwy)) + geom_point(aes(col=class))
+```
+
